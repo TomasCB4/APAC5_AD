@@ -80,9 +80,10 @@ public class playerController {
 		}
 	}
 	
-	@DeleteMapping("/players/{nomPlayer}")
+	@DeleteMapping("/players/{idPlayer}")
 	public ResponseEntity<String> removePlayer(@PathVariable int idPlayer){
 		playerService.deletePlayer(idPlayer);
 		return new ResponseEntity<>("Cuenta eliminada satisfactoriamente", HttpStatus.OK);
 	}
+	
 }
