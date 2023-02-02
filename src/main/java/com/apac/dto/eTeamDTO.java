@@ -50,7 +50,7 @@ public class eTeamDTO implements Serializable{
 		 team.setPressupost(teamDTO.getPressupost()); // Assignem el pressupost
 		 
 		 for(int i=0; i<teamDTO.getElsJugadors().size();i++) { // Recorrem els jugadors del teamDTO
-			 ePlayer player = ePlayerDTO.convertToEntity(teamDTO.getElsJugadors().get(i)); // Convertixc a entitat el jugador.
+			 ePlayer player = ePlayerDTO.convertToEntity(teamDTO.getElsJugadors().get(i),team); // Convertixc a entitat el jugador.
 			 team.getElsJugadors().add(player);
 		 }		 
 		 

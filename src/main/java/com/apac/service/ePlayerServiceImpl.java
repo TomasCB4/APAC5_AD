@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 import com.apac.dto.ePlayerDTO;
 import com.apac.dto.eTeamDTO;
 import com.apac.model.ePlayer;
+import com.apac.model.eTeam;
 import com.apac.repository.ePlayerRepository;
+import com.apac.repository.eTeamRepository;
 
 @Service
 public class ePlayerServiceImpl implements ePlayerService{
 	
 	@Autowired
 	private ePlayerRepository playerRepository;
+	
+	@Autowired
+	private eTeamRepository teamRepository;
 
 	@Override
 	public List<ePlayerDTO> listAllPlayers(eTeamDTO teamDTO) {
@@ -35,7 +40,21 @@ public class ePlayerServiceImpl implements ePlayerService{
 
 	@Override
 	public void savePlayer(ePlayerDTO playerDTO) {
-		playerRepository.save(ePlayerDTO.convertToEntity(playerDTO));
+		
+
+		eTeam team;
+		
+		//creem un nou eTeam desde el DTO,  i ens falla, ja existeix en la BBDD !!!!!
+		//team=eTeamDTO.convertToEntity(playerDTO.getTeam());
+		
+		// recuperem el team desde la BBDD
+		team=teamRepository.findById(playerDTO.getTeam().getNomTeam()).get();
+		
+		ePlayer player=ePlayerDTO.convertToEntity(playerDTO,team);
+		team.getElsJugadors().add(player);
+
+
+		playerRepository.save(player);
 		
 	}
 

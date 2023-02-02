@@ -2,6 +2,7 @@ package com.apac.dto;
 
 import java.io.Serializable;
 import com.apac.model.ePlayer;
+import com.apac.model.eTeam;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
@@ -40,7 +41,7 @@ public class ePlayerDTO implements Serializable{
 		return playerDTO;		
 	}
 	
-	public static ePlayer convertToEntity(ePlayerDTO playerDTO) {
+	public static ePlayer convertToEntity(ePlayerDTO playerDTO,eTeam team) {
 		
 		ePlayer player = new ePlayer();
 		player.setIdPlayer(playerDTO.getIdPlayer());
@@ -49,6 +50,7 @@ public class ePlayerDTO implements Serializable{
 		player.setRol(playerDTO.getRol());
 		player.setNacionalitat(playerDTO.getNacionalitat());
 		
+		player.setTeam(team);
 		return player;
 	}
 }
